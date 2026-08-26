@@ -1,5 +1,6 @@
 ﻿import { mkdir, rm, cp, readdir, readFile, writeFile, unlink } from 'fs/promises'
 import { fileURLToPath } from 'url'
+import { access } from 'fs/promises'
 import { dirname, join, extname, basename } from 'path'
 import sharp from 'sharp'
 
@@ -16,6 +17,15 @@ await cp(
   targetDir,
   { recursive: true }
 )
+
+const sourceCodeDir = join(repositoryRoot, 'docs/_static/source_code')
+if (await pathExists(sourceCodeDir)) {
+  await cp(
+    sourceCodeDir,
+    join(targetDir, '_static/source_code'),
+    { recursive: true, force: true }
+  )
+}
 
 await convertRasterImagesToWebp(targetDir)
 
@@ -35,6 +45,15 @@ async function walkFiles(rootDir) {
   }
 
   return files
+}
+
+async function pathExists(filePath) {
+  try {
+    await access(filePath)
+    return true
+  } catch {
+    return false
+  }
 }
 
 function isConvertibleRasterImage(filePath) {
