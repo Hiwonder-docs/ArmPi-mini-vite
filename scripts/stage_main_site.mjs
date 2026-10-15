@@ -9,7 +9,7 @@ const repositoryRoot = join(__dirname, '..')
 
 await rm(join(repositoryRoot, 'projects'), { recursive: true, force: true })
 
-const targetDir = join(repositoryRoot, 'projects/ArmPi_mini/en/latest')
+const targetDir = join(repositoryRoot, 'projects/ROSMan/en/latest')
 await mkdir(targetDir, { recursive: true })
 
 await cp(
