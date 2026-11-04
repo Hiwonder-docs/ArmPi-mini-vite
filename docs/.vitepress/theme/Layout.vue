@@ -4,6 +4,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { inBrowser, useData, useRoute, withBase } from 'vitepress'
 import PageRedirect from './PageRedirect.vue'
 import ImageViewer from './ImageViewer.vue'
+import FeedbackWidget from './FeedbackWidget.vue'
 
 const { frontmatter } = useData()
 const route = useRoute()
@@ -1033,4 +1034,5 @@ onBeforeUnmount(() => {
     :alt="lightboxAlt"
     @close="closeLightbox"
   />
+  <FeedbackWidget />
 </template>
